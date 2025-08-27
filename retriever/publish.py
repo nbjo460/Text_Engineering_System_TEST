@@ -1,4 +1,4 @@
-from kafka_tools.producer import Producer
+from utils.kafka_tools.producer import Producer
 
 
 class Publish:

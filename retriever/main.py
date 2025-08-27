@@ -1,6 +1,6 @@
 import time
-from kafka_tools.producer import Producer
-from mongodb_tools.DAL_mongodb import DAL_mongo
+from utils.kafka_tools.producer import Producer
+from utils.mongodb_tools.DAL_mongodb import DAL_mongo
 import config
 from retrieve import Retriever
 from publish import Publish

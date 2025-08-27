@@ -1,5 +1,4 @@
-from kafka_tools.producer import Producer
-from mongodb_tools.DAL_mongodb import DAL_mongo
+from utils.mongodb_tools.DAL_mongodb import DAL_mongo
 
 
 class Retriever:

@@ -27,9 +27,10 @@ class Consumer:
                 yield message.value
 
 
-# if __name__ == '__main__':
-#     consumer = Consumer("localhost:9092", "test-topic")
-#     consumer.run_consumer_events()
-#     events =consumer.get_events()
-#     while True:
-#         next(events)
+if __name__ == '__main__':
+    consumer = Consumer("localhost:9092", "raw_tweets_antisemitic")
+    consumer.run_consumer_events()
+    events =consumer.get_events()
+    while True:
+        event = next(events)
+        print(event)

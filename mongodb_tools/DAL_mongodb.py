@@ -64,14 +64,15 @@ class DAL_mongo:
             self.client.close()
 
 
-# if __name__ == "__main__":
-#     DAL_mongo = DAL_mongo(prefix="mongodb+srv",
-#                           host="cluster0.6ycjkak.mongodb.net/",
-#                           database="IranMalDB",
-#                           collection="tweets",
-#                           user="IRGC_NEW",
-#                           password="iran135")
-#     DAL_mongo.open_connection()
-#     documents = DAL_mongo.get_documents(5, 5, "CreateDate")
-#     print(documents)
-#     DAL_mongo.close_connection()
+if __name__ == "__main__":
+    DAL_mongo = DAL_mongo(prefix="mongodb+srv",
+                          host="cluster0.6ycjkak.mongodb.net/",
+                          database="IranMalDB",
+                          collection="tweets",
+                          user="IRGC_NEW",
+                          password="iran135")
+    DAL_mongo.open_connection()
+    documents = DAL_mongo.get_documents(5, 5, "CreateDate")
+    print(documents[0].keys())
+    print(type(documents[0]['Antisemitic']))
+    DAL_mongo.close_connection()

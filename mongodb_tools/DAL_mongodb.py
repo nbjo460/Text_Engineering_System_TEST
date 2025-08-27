@@ -35,11 +35,18 @@ class DAL_mongo:
             return False
 
 
-    def get_documents(self, num_skip, num_limit, sort_by_filed):
+    def get_documents(self, num_skip=None, num_limit=None, sort_by_filed=None):
         if self.client:
             db = self.client[self.database]
             collection = db[self.collection]
-            data = collection.find({}, {"_id": 0}).skip(num_skip).limit(num_limit).sort({sort_by_filed: 1})
+
+            if num_skip and num_limit and sort_by_filed:
+                data = collection.find({}, {"_id": 0}).skip(num_skip).limit(num_limit).sort({sort_by_filed: 1})
+            elif num_skip and num_limit:
+                data = collection.find({}, {"_id": 0}).skip(num_skip).limit(num_limit)
+            else:
+                data = collection.find({}, {"_id": 0})
+
             return list(data)
 
 
@@ -52,21 +59,19 @@ class DAL_mongo:
             return results
 
 
-
-
     def close_connection(self):
         if self.client:
             self.client.close()
 
 
-if __name__ == "__main__":
-    DAL_mongo = DAL_mongo(prefix="mongodb+srv",
-                          host="cluster0.6ycjkak.mongodb.net/",
-                          database="IranMalDB",
-                          collection="tweets",
-                          user="IRGC_NEW",
-                          password="iran135")
-    DAL_mongo.open_connection()
-    documents = DAL_mongo.get_documents(5, 5, "CreateDate")
-    print(documents)
-    DAL_mongo.close_connection()
+# if __name__ == "__main__":
+#     DAL_mongo = DAL_mongo(prefix="mongodb+srv",
+#                           host="cluster0.6ycjkak.mongodb.net/",
+#                           database="IranMalDB",
+#                           collection="tweets",
+#                           user="IRGC_NEW",
+#                           password="iran135")
+#     DAL_mongo.open_connection()
+#     documents = DAL_mongo.get_documents(5, 5, "CreateDate")
+#     print(documents)
+#     DAL_mongo.close_connection()

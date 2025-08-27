@@ -40,12 +40,12 @@ class DAL_mongo:
             db = self.client[self.database]
             collection = db[self.collection]
 
-            if num_skip and num_limit and sort_by_filed:
+            if num_skip is not None and num_limit is not None and sort_by_filed is not None:
                 data = collection.find({}, {"_id": 0}).skip(num_skip).limit(num_limit).sort({sort_by_filed: 1})
-            elif num_skip and num_limit:
+            elif num_skip is not None and num_limit is not None:
                 data = collection.find({}, {"_id": 0}).skip(num_skip).limit(num_limit)
             else:
-                data = collection.find({}, {"_id": 0})
+                 data = collection.find({}, {"_id": 0})
 
             return list(data)
 
@@ -74,5 +74,5 @@ if __name__ == "__main__":
     DAL_mongo.open_connection()
     documents = DAL_mongo.get_documents(5, 5, "CreateDate")
     print(documents[0].keys())
-    print(type(documents[0]['Antisemitic']))
+    print(type(documents[0]['CreateDate']))
     DAL_mongo.close_connection()

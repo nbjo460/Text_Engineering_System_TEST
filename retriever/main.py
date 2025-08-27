@@ -1,24 +1,30 @@
+import time
 from kafka_tools.producer import Producer
 from mongodb_tools.DAL_mongodb import DAL_mongo
 import config
 from retrieve import Retriever
+from publish import Publish
+
+
 
 if __name__ == "__main__":
 
-    DAL_mongo = DAL_mongo(prefix="mongodb+srv",
-                          host="cluster0.6ycjkak.mongodb.net/",
-                          database="IranMalDB",
-                          collection="tweets",
-                          user="IRGC_NEW",
-                          password="iran135")
+    DAL_mongo = DAL_mongo(prefix= config.MONGO_PREFIX,
+                          host= config.MONGO_HOST,
+                          database= config.MONGO_DB,
+                          collection= config.MONGO_COLLECTION,
+                          user= config.MONGO_USER,
+                          password= config.MONGO_PASSWORD)
 
     producer = Producer(config.KAFKA_SERVER_URI)
+    retriever = Retriever(DAL_mongo, config.NUM_DOCUMENTS, config.SORT_BY_FIELD)
+    publish = Publish(producer, config.MATCH_TOPICS, config.CLASSIFIED)
 
-    topics_with_value = {1: config.KAFKA_ANTISEMITIC,0: config.KAFKA_NOT_ANTISEMITIC}
-    send_by_field = 'Antisemitic'
-    num_documents = 10
-    sort_by_field = 'CreateDate'
-    retriever = Retriever(DAL_mongo=DAL_mongo,
-                          num_documents= num_documents,
-                          sort_by_field=sort_by_field)
-    documents = retriever.get_next_documents()
+
+
+    while True:
+        documents = retriever.get_next_documents()
+        publish.publish_messages(documents)
+        time.sleep(config.TIME_SLEEP)
+
+

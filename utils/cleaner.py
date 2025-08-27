@@ -1,4 +1,3 @@
-import pandas as pd
 import string
 
 class Cleaner:
@@ -10,30 +9,37 @@ class Cleaner:
         Apply all the clean options, to one func.
         :return: str
         """
+        self.lower_str()
         self.remove_punctuation()
         self.remove_special_symbols()
-        self.lower_str()
         self.remove_white_space()
         self.remove_stop_words()
         self.lemmatization_text()
 
+
         return self.processed_str
 
-    def remove_punctuation(self):
-        self.processed_str = self.processed_str.maketrans("", "", string.punctuation)
-        return
 
     def lower_str(self):
         self.processed_str = self.processed_str.lower()
         return
 
+    def remove_punctuation(self):
+        translator = str.maketrans("", "", string.punctuation)
+        self.processed_str = self.processed_str.translate(translator)
+        return
+
+
     def remove_special_symbols(self):
-        self.processed_str = ''.join(char for char in self.processed_str if (char.isalnum() or char == ' '))
+        import re
+        self.processed_str = re.sub(r'\W+', ' ', self.processed_str)
         return
 
     def remove_white_space(self):
-        self.processed_str = self.processed_str.replace("\n", " ").replace("\r", ' ')
+
+        self.processed_str = self.processed_str.replace("\n", " ").replace("\r", ' ').replace("\t", " ")
         self.processed_str = " ".join(self.processed_str.split())
+
         return
 
     def remove_stop_words(self):
@@ -44,7 +50,6 @@ class Cleaner:
         nltk.download('stopwords')
         nltk.download('punkt_tab')
 
-        # Filter stopwords using spaCy
         stop_words = set(stopwords.words('english'))
         tokens = word_tokenize(self.processed_str.lower())
         self.processed_str = ' '.join([word for word in tokens if word not in stop_words])
@@ -63,5 +68,7 @@ class Cleaner:
 
         lemmatizer = WordNetLemmatizer()
         tokens = word_tokenize(self.processed_str)
-        self.processed_str = [lemmatizer.lemmatize(word) for word in tokens]
+        self.processed_str = ' '.join([lemmatizer.lemmatize(word) for word in tokens])
+
+
         return

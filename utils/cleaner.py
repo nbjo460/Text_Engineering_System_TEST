@@ -1,6 +1,9 @@
 import string
 
 class Cleaner:
+    """
+
+    """
     def __init__(self, _processed_str : str):
         self.processed_str = _processed_str
 

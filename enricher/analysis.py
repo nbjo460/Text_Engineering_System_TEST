@@ -42,14 +42,17 @@ class Analysis:
         if len(matches_timestamp) > 0:
             last_timestamp = matches_timestamp[0]
             for timestamp in matches_timestamp:
-                print(timestamp)
-                if timestamp.year > last_timestamp.year:
-                     last_timestamp = timestamp
-                elif timestamp.month > last_timestamp.month:
-                    last_timestamp = timestamp
-                elif timestamp.day > last_timestamp.day:
-                    last_timestamp = timestamp
-                else:
-                    pass
+                try:
+                    print(timestamp)
+                    if timestamp.year > last_timestamp.year:
+                         last_timestamp = timestamp
+                    elif timestamp.month > last_timestamp.month:
+                        last_timestamp = timestamp
+                    elif timestamp.day > last_timestamp.day:
+                        last_timestamp = timestamp
+                    else:
+                        pass
+                except Exception as e:
+                    print(f"Error: {e}")
             relevant_timestamp = f"{last_timestamp.day}/{last_timestamp.month}/{last_timestamp.year}"
         return relevant_timestamp

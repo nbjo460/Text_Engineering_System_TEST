@@ -14,7 +14,7 @@ MONGO_COLLECTION_NOT_ANTISEMITIC = os.getenv("MONGO_COLLECTION_NOT_ANTISEMITIC",
 KAFKA_SERVER_URI = os.getenv("KAFKA_SERVER_URI", "localhost:9092")
 
 # global variables with two names of topics
-KAFKA_ANTISEMITIC = "enriched_preprocessed_tweets_not_antisemitic"
+KAFKA_ANTISEMITIC = "enriched_preprocessed_tweets_antisemitic"
 KAFKA_NOT_ANTISEMITIC = "enriched_preprocessed_tweets_not_antisemitic"
 
 # global variables for app - retriever

@@ -49,6 +49,15 @@ class DAL_mongo:
 
             return list(data)
 
+    def get_all_documents(self):
+        if self.client is not None:
+
+            db = self.client[self.database]
+            collection = db[self.collection]
+            data = collection.find({})
+            data["_id"] = str(data["_id"])
+            return list(data)
+
 
 
     def insert_one(self, data):

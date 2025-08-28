@@ -56,6 +56,8 @@ class DAL_mongo:
             collection = db[self.collection]
             data = collection.find({})
             data["_id"] = str(data["_id"])
+            print(len(list(data)))
+            print(list(data))
             return list(data)
 
 

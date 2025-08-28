@@ -4,8 +4,15 @@ from utils.mongodb_tools.DAL_mongodb import DAL_mongo as Dal
 
 app = fastapi.FastAPI()
 
+dal_NOT_ANTISEMITIC = Dal(config.MONGO_PREFIX,
+                           config.MONGO_HOST,
+                           config.MONGO_DB,
+                           config.MONGO_COLLECTION_NOT_ANTISEMITIC)
 
-
+dal_ANTISEMITIC = Dal(config.MONGO_PREFIX,
+          config.MONGO_HOST,
+          config.MONGO_DB,
+          config.MONGO_COLLECTION_ANTISEMITIC)
 @app.get("/")
 def root():
     return {"status" : "HELLO"}
@@ -16,11 +23,8 @@ def load_interesting():
     :return: json
     """
 
-    dal = Dal(config.MONGO_PREFIX,
-              config.MONGO_HOST,
-              config.MONGO_DB,
-              config.MONGO_COLLECTION_ANTISEMITIC)
-    return dal.get_all_documents()
+
+    return dal_ANTISEMITIC.get_all_documents()
 
 @app.get("/get-messages-not-antisemitic")
 def load_interesting():
@@ -29,8 +33,4 @@ def load_interesting():
     :return: json
     """
 
-    dal = Dal(config.MONGO_PREFIX,
-              config.MONGO_HOST,
-              config.MONGO_DB,
-              config.MONGO_COLLECTION_NOT_ANTISEMITIC)
-    return dal.get_all_documents()
+    return dal_NOT_ANTISEMITIC.get_all_documents()

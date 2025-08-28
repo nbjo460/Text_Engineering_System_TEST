@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
-COPY ./enricher .
+COPY ./dataretrieval .
 COPY ./utils utils/
 CMD ["python", "main.py"]

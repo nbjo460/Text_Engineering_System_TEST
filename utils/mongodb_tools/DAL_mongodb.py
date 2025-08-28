@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-
+from bson.objectid import ObjectId
 
 
 class DAL_mongo:
@@ -55,10 +55,12 @@ class DAL_mongo:
             db = self.client[self.database]
             collection = db[self.collection]
             data = collection.find({})
-            data["_id"] = str(data["_id"])
-            print(len(list(data)))
-            print(list(data))
-            return list(data)
+            listed_data = list(data)
+            for document in listed_data:
+                print(document["_id"], type(document["_id"]))
+                object_id = ObjectId(document["_id"])
+                document["_id"] = str(object_id)
+            return listed_data
 
 
 

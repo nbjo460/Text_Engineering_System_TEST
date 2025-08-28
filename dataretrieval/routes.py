@@ -1,6 +1,8 @@
 import fastapi
 from contextlib import asynccontextmanager
 import config
+
+
 from utils.mongodb_tools.DAL_mongodb import DAL_mongo as Dal
 
 dal_NOT_ANTISEMITIC = Dal(config.MONGO_PREFIX,

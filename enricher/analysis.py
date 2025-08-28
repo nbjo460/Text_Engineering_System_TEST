@@ -19,7 +19,7 @@ class Analysis:
             else:
                 sentiment = "neutral"
 
-            return {"sentiment": sentiment}
+            return sentiment
 
 
     def weapons_detected(self, weapons: list):
@@ -33,7 +33,7 @@ class Analysis:
             if len(weapons_detected) == 0:
                 weapons_detected = ""
 
-            return {"weapons_detected": weapons_detected}
+            return weapons_detected
 
 
     def relevant_timestamp(self):
@@ -42,7 +42,14 @@ class Analysis:
         if len(matches_timestamp) > 0:
             last_timestamp = matches_timestamp[0]
             for timestamp in matches_timestamp:
-                if timestamp > last_timestamp:
+                print(timestamp)
+                if timestamp.year > last_timestamp.year:
                      last_timestamp = timestamp
+                elif timestamp.month > last_timestamp.month:
+                    last_timestamp = timestamp
+                elif timestamp.day > last_timestamp.day:
+                    last_timestamp = timestamp
+                else:
+                    pass
             relevant_timestamp = f"{last_timestamp.day}/{last_timestamp.month}/{last_timestamp.year}"
-        return {"relevant_timestamp": relevant_timestamp}
+        return relevant_timestamp

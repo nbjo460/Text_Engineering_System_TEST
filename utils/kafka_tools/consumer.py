@@ -28,7 +28,7 @@ class Consumer:
 
 
 if __name__ == '__main__':
-    consumer = Consumer("localhost:9092", "preprocessed_tweets_not_antisemitic")
+    consumer = Consumer("localhost:9092", "enriched_preprocessed_tweets_not_antisemitic")
     consumer.run_consumer_events()
     events =consumer.get_events()
     while True:

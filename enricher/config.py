@@ -9,4 +9,5 @@ DESTINATION_NOT_ANTISEMITIC_TWEETS_TOPIC = "enriched_preprocessed_tweets_not_ant
 # env uri for kafka, initialized with localhost uri
 KAFKA_SERVER_URI = os.getenv("KAFKA_SERVER_URI", "localhost:9092")
 
+PATH_WEAPONS = os.getenv("PATH_WEAPONS", 'data/weapon_list.txt')
 ORIGINAL_TEXT_FIELD = 'text'

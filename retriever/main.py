@@ -7,6 +7,8 @@ from publish import Publish
 
 
 
+
+
 if __name__ == "__main__":
 
     DAL_mongo = DAL_mongo(prefix= config.MONGO_PREFIX,

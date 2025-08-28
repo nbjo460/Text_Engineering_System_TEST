@@ -28,10 +28,4 @@ class Producer:
 
 
 
-# if __name__ == "__main__":
-#     producer = Producer("localhost")
-#     producer.create_producer()
-#     message = {"message": "test massage"}
-#     producer.publish_messages("test-topic" ,message)
-#     producer.close_producer()
 

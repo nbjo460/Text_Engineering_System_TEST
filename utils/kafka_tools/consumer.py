@@ -25,12 +25,3 @@ class Consumer:
                 print(f"topic:  {message.topic}")
 
                 yield message
-
-
-if __name__ == '__main__':
-    consumer = Consumer("localhost:9092", "enriched_preprocessed_tweets_not_antisemitic")
-    consumer.run_consumer_events()
-    events =consumer.get_events()
-    while True:
-        event = next(events)
-        print(event)

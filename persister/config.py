@@ -8,7 +8,7 @@ MONGO_PASSWORD = os.getenv("MONGO_PASSWORD", "")
 MONGO_DB = os.getenv("MONGO_DB", "IranMalDB")
 
 MONGO_COLLECTION_ANTISEMITIC = os.getenv("MONGO_COLLECTION_ANTISEMITIC", "tweets_antisemitic")
-MONGO_COLLECTION_NOT_ANTISEMITIC = os.getenv("MONGO_COLLECTION_NOT_ANTISEMITIC", "tweets_antisemitic")
+MONGO_COLLECTION_NOT_ANTISEMITIC = os.getenv("MONGO_COLLECTION_NOT_ANTISEMITIC", "tweets_not_antisemitic")
 
 # env uri for kafka, initialized with localhost uri
 KAFKA_SERVER_URI = os.getenv("KAFKA_SERVER_URI", "localhost:9092")

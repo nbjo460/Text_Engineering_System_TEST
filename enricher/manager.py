@@ -1,7 +1,6 @@
 from utils.kafka_tools.consumer import Consumer
 from utils.kafka_tools.producer import Producer
 import config
-from utils.cleaner import Cleaner
 from analysis import Analysis
 
 

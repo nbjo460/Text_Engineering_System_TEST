@@ -1,5 +1,6 @@
-
+from manager import Manager
 
 
 if __name__ == "__main__":
-    pass
+    manager = Manager()
+    manager.manage_message()

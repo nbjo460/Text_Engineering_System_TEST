@@ -17,8 +17,8 @@ KAFKA_NOT_ANTISEMITIC = "raw_tweets_not_antisemitic"
 
 # global variables for app - retriever
 MATCH_TOPICS = {1: KAFKA_ANTISEMITIC, 0: KAFKA_NOT_ANTISEMITIC} # topics vs match values in data
-NUM_DOCUMENTS = 5
+NUM_DOCUMENTS = 100
 CLASSIFIED = 'Antisemitic'
 SORT_BY_FIELD = 'CreateDate'
-TIME_SLEEP = 10
+TIME_SLEEP = 60
 

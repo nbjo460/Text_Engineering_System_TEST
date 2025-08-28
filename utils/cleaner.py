@@ -1,4 +1,16 @@
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+import nltk
+
 import string
+
+nltk.download('punkt_tab')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+nltk.download('averaged_perceptron_tagger_eng')
+nltk.download('stopwords')
+nltk.download('punkt_tab')
 
 class Cleaner:
     """
@@ -46,12 +58,9 @@ class Cleaner:
         return
 
     def remove_stop_words(self):
-        import nltk
-        from nltk.corpus import stopwords
-        from nltk.tokenize import word_tokenize
 
-        nltk.download('stopwords')
-        nltk.download('punkt_tab')
+
+
 
         stop_words = set(stopwords.words('english'))
         tokens = word_tokenize(self.processed_str.lower())
@@ -60,14 +69,6 @@ class Cleaner:
         return
 
     def lemmatization_text(self):
-        from nltk.tokenize import word_tokenize
-        from nltk.stem import WordNetLemmatizer
-        import nltk
-
-        nltk.download('punkt_tab')
-        nltk.download('wordnet')
-        nltk.download('omw-1.4')
-        nltk.download('averaged_perceptron_tagger_eng')
 
         lemmatizer = WordNetLemmatizer()
         tokens = word_tokenize(self.processed_str)

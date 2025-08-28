@@ -1,0 +1,48 @@
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+nltk.download('vader_lexicon')
+import datefinder
+
+
+class Analysis:
+
+    def __init__(self, text: str):
+        self.text = text
+
+
+    def define_sentiment(self):
+            score = SentimentIntensityAnalyzer().polarity_scores(self.text)
+            if score["compound"] >= 0.5:
+                sentiment = "positive"
+            elif score["compound"] >= -0.5:
+                sentiment = "negative"
+            else:
+                sentiment = "neutral"
+
+            return {"sentiment": sentiment}
+
+
+    def weapons_detected(self, weapons: list):
+        weapons_detected = []
+
+        words = self.text.split()
+        for word in words:
+            if word in weapons:
+                weapons_detected.append(word)
+
+            if len(weapons_detected) == 0:
+                weapons_detected = ""
+
+            return {"weapons_detected": weapons_detected}
+
+
+    def relevant_timestamp(self):
+        relevant_timestamp = ""
+        matches_timestamp = list(datefinder.find_dates(self.text))
+        if len(matches_timestamp) > 0:
+            last_timestamp = matches_timestamp[0]
+            for timestamp in matches_timestamp:
+                if timestamp > last_timestamp:
+                     last_timestamp = timestamp
+            relevant_timestamp = f"{last_timestamp.day}/{last_timestamp.month}/{last_timestamp.year}"
+        return {"relevant_timestamp": relevant_timestamp}
